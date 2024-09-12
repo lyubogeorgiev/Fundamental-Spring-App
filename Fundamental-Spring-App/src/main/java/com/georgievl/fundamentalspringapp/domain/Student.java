@@ -1,9 +1,9 @@
 package com.georgievl.fundamentalspringapp.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Student {
@@ -12,6 +12,19 @@ public class Student {
     private Long id;
     private String name;
     private String studentNumber;
+
+    @ManyToMany
+    @JoinTable(name = "course_student", joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    private Set<Course> courses = new HashSet<>();
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
 
     public String getName() {
         return name;
