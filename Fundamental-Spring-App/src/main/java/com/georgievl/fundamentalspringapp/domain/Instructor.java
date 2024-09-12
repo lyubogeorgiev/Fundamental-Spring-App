@@ -43,4 +43,26 @@ public class Instructor {
     public void setEmployeeNumber(String employeeNumber) {
         this.employeeNumber = employeeNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Instructor{" +
+                "name='" + name + '\'' +
+                ", employeeNumber='" + employeeNumber + '\'' +
+                ", courses=" + courses +
+                '}';
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Instructor that)) return false;
+
+        return instructorId.equals(that.instructorId);
+    }
+
+    @Override
+    public int hashCode() {
+        return instructorId.hashCode();
+    }
 }

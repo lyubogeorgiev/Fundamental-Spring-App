@@ -51,4 +51,27 @@ public class Course {
     public void setCode(String code) {
         this.code = code;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", instructor=" + instructor +
+                ", students=" + students +
+                '}';
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Course course)) return false;
+
+        return courseId.equals(course.courseId);
+    }
+
+    @Override
+    public int hashCode() {
+        return courseId.hashCode();
+    }
 }

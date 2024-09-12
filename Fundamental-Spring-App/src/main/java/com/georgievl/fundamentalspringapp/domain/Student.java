@@ -41,4 +41,26 @@ public class Student {
     public void setStudentNumber(String studentNumber) {
         this.studentNumber = studentNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", studentNumber='" + studentNumber + '\'' +
+                ", courses=" + courses +
+                '}';
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student student)) return false;
+
+        return id.equals(student.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }
