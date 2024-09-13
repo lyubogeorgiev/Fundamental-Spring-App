@@ -60,15 +60,15 @@ public class Course {
         this.code = code;
     }
 
-    @Override
-    public String toString() {
-        return "Course{" +
-                "name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", instructor=" + instructor +
-                ", students=" + students +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Course{" +
+//                "name='" + name + '\'' +
+//                ", code='" + code + '\'' +
+//                ", instructor=" + instructor +
+//                ", students=" + students +
+//                '}';
+//    }
 
     @Override
     public final boolean equals(Object o) {

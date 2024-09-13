@@ -15,6 +15,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Iterable<Course> findAll() {
+        courseRepository.findAll().forEach(System.out::println);
         return courseRepository.findAll();
     }
 }

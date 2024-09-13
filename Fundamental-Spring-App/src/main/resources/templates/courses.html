@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses Page</title>
+</head>
+<body>
+    <h1>Courses</h1>
+    <table>
+        <th>
+            <tr>
+                <td>Course Name</td>
+                <td>Course Number</td>
+                <td>Number of Students</td>
+            </tr>
+        </th>
+        <tr th:each="course:${courses}">
+            <td th:text="${course.getName()}"></td>
+            <td th:text="${course.getCode()}"></td>
+            <td th:text="${course.getStudents().size()}"></td>
+        </tr>
+    </table>
+    <a href="/">BACK</a>
+</body>
+</html>
