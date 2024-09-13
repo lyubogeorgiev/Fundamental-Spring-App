@@ -18,12 +18,20 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     private Set<Course> courses = new HashSet<>();
 
+    public Student() {
+    }
+
+    public Student(String name, String studentNumber) {
+        this.name = name;
+        this.studentNumber = studentNumber;
+    }
+
     public Set<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
+    public void addCourse(Course course) {
+        this.courses.add(course);
     }
 
     public String getName() {

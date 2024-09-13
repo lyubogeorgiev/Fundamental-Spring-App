@@ -20,6 +20,14 @@ public class Instructor {
     )
     private Set<Course> courses = new HashSet<>();
 
+    public Instructor() {
+    }
+
+    public Instructor(String name, String employeeNumber) {
+        this.name = name;
+        this.employeeNumber = employeeNumber;
+    }
+
     public Set<Course> getCourses() {
         return courses;
     }
