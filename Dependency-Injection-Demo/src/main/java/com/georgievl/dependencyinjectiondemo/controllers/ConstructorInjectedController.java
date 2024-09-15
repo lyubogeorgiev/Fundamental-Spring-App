@@ -1,8 +1,9 @@
 package com.georgievl.dependencyinjectiondemo.controllers;
 
 import com.georgievl.dependencyinjectiondemo.services.GreetingService;
-import com.georgievl.dependencyinjectiondemo.services.GreetingServiceImpl;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class ConstructorInjectedController {
     private final GreetingService greetingService;
 
