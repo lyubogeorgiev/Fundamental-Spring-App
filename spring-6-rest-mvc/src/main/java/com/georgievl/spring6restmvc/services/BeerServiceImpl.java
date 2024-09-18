@@ -1,4 +1,4 @@
-package com.georgievl.spring6restmvc.sercice;
+package com.georgievl.spring6restmvc.services;
 
 import com.georgievl.spring6restmvc.model.BeerDTO;
 import com.georgievl.spring6restmvc.model.BeerStyle;

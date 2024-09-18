@@ -1,7 +1,7 @@
 package com.georgievl.spring6restmvc.controllers;
 
 import com.georgievl.spring6restmvc.model.BeerDTO;
-import com.georgievl.spring6restmvc.sercice.BeerService;
+import com.georgievl.spring6restmvc.services.BeerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;

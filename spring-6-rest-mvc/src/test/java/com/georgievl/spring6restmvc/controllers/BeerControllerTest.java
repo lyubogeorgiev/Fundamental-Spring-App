@@ -2,8 +2,8 @@ package com.georgievl.spring6restmvc.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.georgievl.spring6restmvc.model.BeerDTO;
-import com.georgievl.spring6restmvc.sercice.BeerService;
-import com.georgievl.spring6restmvc.sercice.BeerServiceImpl;
+import com.georgievl.spring6restmvc.services.BeerService;
+import com.georgievl.spring6restmvc.services.BeerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

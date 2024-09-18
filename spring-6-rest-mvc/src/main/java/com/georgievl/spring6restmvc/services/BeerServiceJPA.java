@@ -1,4 +1,4 @@
-package com.georgievl.spring6restmvc.sercice;
+package com.georgievl.spring6restmvc.services;
 
 import com.georgievl.spring6restmvc.mappers.BeerMapper;
 import com.georgievl.spring6restmvc.model.BeerDTO;
@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
