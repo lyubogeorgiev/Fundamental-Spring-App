@@ -7,6 +7,9 @@ import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
 
 import java.util.List;
@@ -26,6 +29,26 @@ class BeerControllerIT {
     @Autowired
     private BeerRepository beerRepository;
 
+    @Transactional
+    @Rollback
+    @Test
+    void saveNewBeerTest() {
+        BeerDTO beerDTO = BeerDTO.builder()
+                .beerName("New Beer")
+                .build();
+
+        ResponseEntity responseEntity = beerController.saveNewBeer(beerDTO);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(201));
+        assertThat(responseEntity.getHeaders().getLocation()).isNotNull();
+
+        String[] locationUuid = responseEntity.getHeaders().getLocation().toString().split("/");
+        UUID savedUuid = UUID.fromString(locationUuid[locationUuid.length-1]);
+
+        Beer savedBeer = repository.findById(savedUuid).get();
+        assertThat(savedBeer).isNotNull();
+    }
+
     @Test
     void testGetBeerByIdNotFound() {
         assertThrows(NotFoundException.class, () -> {
@@ -35,7 +58,7 @@ class BeerControllerIT {
 
     @Test
     void testGetBeerById() {
-        Beer beer = beerRepository.findAll().get(0);
+        Beer beer = beerRepository.findAll().getFirst();
 
         BeerDTO beerDTO = beerController.getBeerById(beer.getId());
 
