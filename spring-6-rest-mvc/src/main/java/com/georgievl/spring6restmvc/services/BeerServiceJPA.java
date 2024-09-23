@@ -1,5 +1,6 @@
 package com.georgievl.spring6restmvc.services;
 
+import com.georgievl.spring6restmvc.entities.Beer;
 import com.georgievl.spring6restmvc.mappers.BeerMapper;
 import com.georgievl.spring6restmvc.model.BeerDTO;
 import com.georgievl.spring6restmvc.repositories.BeerRepository;
@@ -70,6 +71,12 @@ public class BeerServiceJPA implements BeerService {
 
     @Override
     public void patchBeerById(UUID beerId, BeerDTO beer) {
+        Beer existingBeer = beerRepository.findById(beerId).get();
 
+        existingBeer.setBeerName(beer.getBeerName());
+        existingBeer.setBeerStyle(beer.getBeerStyle());
+        existingBeer.setUpc(beer.getUpc());
+        existingBeer.setPrice(beer.getPrice());
+        beerRepository.save(existingBeer);
     }
 }
