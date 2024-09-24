@@ -40,6 +40,9 @@ public class Beer {
     @NotNull
     private BeerStyle beerStyle;
 
+    @Column(length = 255)
+    private String description;
+
     @NotNull
     @NotBlank
     @Size(max = 255)
