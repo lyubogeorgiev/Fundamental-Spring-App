@@ -61,7 +61,9 @@ public class BootstrapData implements CommandLineRunner {
                     case "American Pale Ale (APA)",
                          "American Black Ale",
                          "Belgian Dark Ale",
-                         "American Blonde Ale" -> BeerStyle.IPA;
+                         "American Blonde Ale",
+                         "American Double / Imperial IPA",
+                         "Saison / Farmhouse Ale" -> BeerStyle.IPA;
                     default -> BeerStyle.PILSNER;
                 };
 

@@ -5,13 +5,13 @@ import com.georgievl.spring6restmvc.entities.Beer;
 import com.georgievl.spring6restmvc.mappers.BeerMapperImpl;
 import com.georgievl.spring6restmvc.model.BeerStyle;
 import com.georgievl.spring6restmvc.services.BeerCsvServiceImpl;
-import com.georgievl.spring6restmvc.services.BeerService;
 import com.georgievl.spring6restmvc.services.BeerServiceImpl;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -28,11 +28,11 @@ class BeerRepositoryTest {
 
     @Test
     void testGetBeerListByName() {
-        List<Beer> beerList = beerRepository.findAllByBeerNameLikeIgnoreCase("%IPA%");
+        Page<Beer> beerList = beerRepository.findAllByBeerNameIsLikeIgnoreCase("%IPA%", null);
 
-        System.out.println(beerList.size());
+        System.out.println(beerList.getContent().size());
 
-        assertThat(beerList.size()).isEqualTo(334);
+        assertThat(beerList.getContent().size()).isEqualTo(334);
     }
 
     @Test
