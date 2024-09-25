@@ -13,6 +13,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
@@ -22,8 +23,8 @@ import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.List;
 
-@RequiredArgsConstructor
 @Component
+@RequiredArgsConstructor
 public class BootstrapData implements CommandLineRunner {
     private final BeerRepository beerRepository;
     private final BeerMapper beerMapper;
@@ -33,9 +34,9 @@ public class BootstrapData implements CommandLineRunner {
     @Transactional
     @Override
     public void run(String... args) throws Exception {
-        
+
         loadCsvData();
-        
+
 //        if (beerRepository.count() == 0) {
 //            BeerServiceImpl beerService = new BeerServiceImpl();
 //
