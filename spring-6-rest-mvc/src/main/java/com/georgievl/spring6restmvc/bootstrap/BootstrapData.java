@@ -2,13 +2,13 @@ package com.georgievl.spring6restmvc.bootstrap;
 
 import com.georgievl.spring6restmvc.entities.Beer;
 import com.georgievl.spring6restmvc.mappers.BeerMapper;
+import com.georgievl.spring6restmvc.mappers.CustomerMapper;
 import com.georgievl.spring6restmvc.model.BeerCSVRecord;
 import com.georgievl.spring6restmvc.model.BeerStyle;
+import com.georgievl.spring6restmvc.model.CustomerDTO;
 import com.georgievl.spring6restmvc.repositories.BeerRepository;
-import com.georgievl.spring6restmvc.services.BeerCsvService;
-import com.georgievl.spring6restmvc.services.BeerCsvServiceImpl;
-import com.georgievl.spring6restmvc.services.BeerService;
-import com.georgievl.spring6restmvc.services.BeerServiceImpl;
+import com.georgievl.spring6restmvc.repositories.CustomerRepository;
+import com.georgievl.spring6restmvc.services.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -30,12 +30,15 @@ public class BootstrapData implements CommandLineRunner {
     private final BeerMapper beerMapper;
     private final BeerService beerService;
     private final BeerCsvService beerCsvService;
+    private final CustomerService customerService;
+    private final CustomerRepository customerRepository;
 
     @Transactional
     @Override
     public void run(String... args) throws Exception {
 
         loadCsvData();
+        addSampleCustomers();
 
 //        if (beerRepository.count() == 0) {
 //            BeerServiceImpl beerService = new BeerServiceImpl();
@@ -47,6 +50,23 @@ public class BootstrapData implements CommandLineRunner {
 //
 //            beerRepository.saveAll(beers);
 //        }
+    }
+
+    private void addSampleCustomers() {
+        if (customerRepository.count() < 2) {
+            CustomerDTO customer1 = CustomerDTO.builder()
+                    .name("John Smith")
+                    .email("john.smith@gmail.com")
+                    .build();
+
+            CustomerDTO customer2 = CustomerDTO.builder()
+                    .name("Jessica Adams")
+                    .email("jess.adams@gmail.com")
+                    .build();
+
+            customerService.saveNewCustomer(customer1);
+            customerService.saveNewCustomer(customer2);
+        }
     }
 
     private void loadCsvData() throws FileNotFoundException {
