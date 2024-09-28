@@ -2,6 +2,7 @@ package com.georgievl.spring6resttemplate.client;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.georgievl.spring6resttemplate.model.BeerDTO;
+import com.georgievl.spring6resttemplate.page.BeerDTOPageImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.data.domain.Page;
@@ -36,6 +37,10 @@ public class BeerClientImpl implements BeerClient {
                         .forEach(node -> {System.out.println(node.get("beerName").asText());});
 
         System.out.println(stringResponse.getBody());
+
+        ResponseEntity<BeerDTOPageImpl> pageResponse =
+                restTemplate.getForEntity(BASE_URL + GET_BEER_PATH, BeerDTOPageImpl.class);
+
         return null;
     }
 }
