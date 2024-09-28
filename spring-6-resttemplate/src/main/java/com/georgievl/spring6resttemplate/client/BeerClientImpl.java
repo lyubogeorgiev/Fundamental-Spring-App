@@ -16,7 +16,6 @@ import java.util.Map;
 @Service
 public class BeerClientImpl implements BeerClient {
 
-    private static final String BASE_URL = "http://localhost:8080";
     private static final String GET_BEER_PATH = "/api/v1/beer";
     private final RestTemplateBuilder restTemplateBuilder;
 
@@ -25,13 +24,13 @@ public class BeerClientImpl implements BeerClient {
         RestTemplate restTemplate = restTemplateBuilder.build();
 
         ResponseEntity<String> stringResponse =
-                restTemplate.getForEntity(BASE_URL + GET_BEER_PATH, String.class);
+                restTemplate.getForEntity(GET_BEER_PATH, String.class);
 
         ResponseEntity<Map> mapResponse =
-                restTemplate.getForEntity(BASE_URL + GET_BEER_PATH, Map.class);
+                restTemplate.getForEntity(GET_BEER_PATH, Map.class);
 
         ResponseEntity<JsonNode> jsonResponse =
-                restTemplate.getForEntity(BASE_URL + GET_BEER_PATH, JsonNode.class);
+                restTemplate.getForEntity(GET_BEER_PATH, JsonNode.class);
 
         jsonResponse.getBody().findPath("content")
                         .forEach(node -> {System.out.println(node.get("beerName").asText());});
@@ -39,8 +38,8 @@ public class BeerClientImpl implements BeerClient {
         System.out.println(stringResponse.getBody());
 
         ResponseEntity<BeerDTOPageImpl> pageResponse =
-                restTemplate.getForEntity(BASE_URL + GET_BEER_PATH, BeerDTOPageImpl.class);
+                restTemplate.getForEntity(GET_BEER_PATH, BeerDTOPageImpl.class);
 
-        return null;
+         return pageResponse.getBody();
     }
 }
