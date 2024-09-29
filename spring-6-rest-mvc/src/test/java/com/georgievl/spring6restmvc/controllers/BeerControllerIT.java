@@ -27,16 +27,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static com.georgievl.spring6restmvc.controllers.BeerControllerTest.PASSWORD;
+import static com.georgievl.spring6restmvc.controllers.BeerControllerTest.USERNAME;
 import static org.hamcrest.core.Is.is;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.isNull;
-import static org.mockito.Mockito.verify;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.StatusResultMatchersExtensionsKt.isEqualTo;
 
 
 @SpringBootTest
@@ -61,7 +62,9 @@ class BeerControllerIT {
 
     @BeforeEach
     void setUp() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac)
+                .apply(springSecurity())
+                .build();
     }
 
     @Test
@@ -111,6 +114,7 @@ class BeerControllerIT {
     @Test
     void testListBeersByStyle() throws Exception {
         mockMvc.perform(get(BeerController.BEER_PATH)
+                        .with(httpBasic(USERNAME, PASSWORD))
                 .queryParam("beerStyle", BeerStyle.IPA.name()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(557)));
@@ -120,6 +124,7 @@ class BeerControllerIT {
     @Test
     void testListBeersByName() throws Exception {
         mockMvc.perform(get(BeerController.BEER_PATH)
+                        .with(httpBasic(USERNAME, PASSWORD))
                 .queryParam("beerName", "IPA"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.size()", is(334)));
@@ -134,6 +139,7 @@ class BeerControllerIT {
                 "New Name set to really long, so it exceeds the 50 character allowance...to make sure again 0123456789012345678901234567890123456789");
 
         MvcResult result = mockMvc.perform(patch(BeerController.BEER_PATH_ID, beer.getId())
+                        .with(httpBasic(USERNAME, PASSWORD))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(beerMap)))
