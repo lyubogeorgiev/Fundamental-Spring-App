@@ -20,4 +20,9 @@ public class IndexController {
 
         return "index";
     }
+
+    @RequestMapping("secured")
+    public String secured(){
+        return "secured";
+    }
 }
